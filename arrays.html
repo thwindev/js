@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    // join('') split('')
+
+    //normal array
+    var arr = new Array('Thwin', 22, 12.12, 'hello world');
+    var fruit_arr = ['orange', 'apple', 'strewberry', 'mango', 'coconut'];
+
+    console.log(
+        `arr length = ${arr.length}\nfruit length = ${fruit_arr.length}\n${arr}\n${fruit_arr}`);
+
+    //associated array => key and value
+    var associated_array = [];
+    associated_array['name'] = 'Walter';
+    associated_array['age'] = 55;
+    associated_array[0] = 12.1212;
+
+    console.log(associated_array['name'], associated_array['age']);
+
+    var associated_arr2 = {
+        'name': 'John Snow',
+        'movie': 'Game Of Thrones',
+        MySelf() {
+            console.log(`Name = ${this.name}\ , Movie = ${this.movie}`);
+        }
+    }
+    associated_arr2.MySelf();
+
+    //push,unshift,[...new_array] => add , pop,shift => del
+    var test1 = [1, 2, 3, 4, 5];
+    var test2 = [...test1, 6, 7, 8, 9];
+    test2.push(10, 11, 12); // add elements after last element of array
+    test2.pop(); //del last number
+    test2.shift(); // del first element of array
+    test2.unshift(0); // add before first element of array
+    console.log(test2);
+
+    //external array functions 
+    // map(), filter(), reduce()
+</script>
+
+</html>

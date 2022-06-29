@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>functions</title>
+</head>
+
+<body>
+
+
+
+</body>
+<script>
+    //no argument func
+    function funcName() {
+        console.log('hello world');
+    }
+
+    //argument argument func
+    function funcNameS(argument = 100) {
+        console.log(argument);
+    }
+
+    //multiple arguments func
+    function multiFunc(arg1, arg2) {
+        console.log(arg1, arg2);
+    }
+
+    //type & void func
+    //type function which return values
+    function typeFunc(n1, n2) {
+        return n1 + n2;
+    }
+
+    const result = typeFunc(2, 2);
+    console.log('result = ', result);
+
+    function voidFunc(n1, n2) {
+        console.log('result from void function =', n1 + n2)
+    }
+    voidFunc(12, 12);
+
+    //declare functions cannot use before declare
+    var minus = function(n1, n2) {
+        return n1 - n2;
+    }
+
+    var minus_value = minus(12, 6);
+    console.log('minus_value = ', minus_value);
+
+    //arrow function
+
+    var multiple = (n1, n2) => n1 * n2;
+    console.log('multiple_value = ', multiple(12, 6));
+
+    var testing = () => console.log('testing function');
+    testing();
+</script>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API testing</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        .content {
+            margin: 30px;
+            columns: 50px 3;
+        }
+        
+        .api-img {
+            width: 100px;
+            height: 100px;
+        }
+        
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            margin: auto;
+        }
+        
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #000000;
+            color: white;
+        }
+        
+        .show-detail-container {
+            width: 50%;
+            margin: auto;
+        }
+        
+        .show-detail-container>div {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        
+        .show-detail-container>div>img {
+            width: 200px;
+        }
+        
+        .show-detail-container>div>.item-details>span {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <div class="content" id="page">
+        <img src="https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2016/10/camera-photo-lens-stock-images.jpg?q=50&fit=contain&w=1500&h=750&dpr=1.5" alt="">
+    </div> -->
+
+    <div class="show-detail-container">
+        <div class="">
+            <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/FQKW2?wid=1673&hei=1353&fmt=jpeg&qlt=95&.v=1517334319257" alt="">
+            <div class="item-details">
+                <span>Name: Apple Watch</span>
+                <span>Price: $500</span>
+                <span>Rating: 10</span>
+            </div>
+        </div>
+    </div>
+
+    <table id="customers">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+
+</body>
+<script>
+    // https://fakestoreapi.com/products
+
+    let page = document.querySelector('#page');
+    let tbody = document.querySelector('#tbody');
+    let detail_box = document.querySelector('.show-detail-container>div');
+
+    fetch('https://fakestoreapi.com/products')
+        .then((response) => response.json())
+        .then((result) => {
+            // console.log(result);
+
+            result.filter((item) => {
+                // console.log(item.image)
+                tbody.innerHTML += ` 
+            <tr class='table-row'  onclick="detail(${item.id})">
+                <td>${item.id}</td>
+                <td>${item.title}</td>
+                <td>${item.category}</td>
+                <td>$${item.price}</td>
+                <td>
+                    <a href="${item.image}"><img src="${item.image}" class="api-img"/></a>
+                </td>
+            </tr>`;
+            });
+
+            //show items details
+
+            // testing singular for category men's clothing 
+            // result.filter((item) => item.category == `men's clothing`).map((item) => {
+            //     tbody.innerHTML += ` 
+            // <tr>
+            //     <td>${item.id}</td>
+            //     <td>${item.title}</td>
+            //     <td>${item.category}</td>
+            //     <td>$${item.price}</td>
+            //     <td><img src="${item.image}" class="api-img"/></td>
+            // </tr>`;
+            // })
+        });
+
+    function detail(id) {
+        fetch('https://fakestoreapi.com/products/' + id)
+            .then((response) => response.json())
+            .then((result) => {
+                // console.log(result);
+
+                detail_box.innerHTML = `
+                 <img src="${result.image}" alt="">
+                <div class="item-details">
+                    <span>Name:${result.title}</span>
+                    <span>Price: $${result.price}</span>
+                    <span>Rating: ${result.rating.rate}</span>
+                </div>
+                `;
+            })
+    }
+
+    // fetch('https://fakestoreapi.com/products').then((response) => {
+    //     console.log(response.json());
+    // }).catch((error) => {
+    //     console.log(error);
+    // })
+</script>
+
+</html>

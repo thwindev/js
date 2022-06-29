@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testing</title>
+</head>
+
+<body>
+
+    <h4>Testing event delegation</h4>
+    <input type="text" id="input">
+    <button id="add">add</button>
+    <ul id="output"></ul>
+</body>
+<script>
+    const output = document.querySelector('#output');
+    const n = new Array('one', 'two', 'three', 'four', 'five');
+    const add = document.querySelector('#add');
+
+    let input = document.querySelector('#input');
+
+    let addList = (word) => {
+        let li = document.createElement('li');
+        let content = document.createTextNode(word);
+
+        li.appendChild(content);
+        output.append(li);
+    }
+
+    n.map((el) => {
+        addList(el);
+    })
+
+    add.addEventListener('click', () => {
+        const input_value = input.value;
+
+        addList(input_value);
+
+    });
+
+    // Event deligation => parent layer control process
+    output.addEventListener('click', (el) => {
+        console.log(el.target.innerHTML);
+    });
+</script>
+
+</html>
